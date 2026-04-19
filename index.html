@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Financial Intelligence Layer | AI-Powered Investment Insights</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    Bharat FIL
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#demo">Demo</a>
+                    <a href="#about">About</a>
+                </div>
+                <button class="cta-button" id="uploadNavBtn">
+                    <i class="fas fa-upload"></i> Upload Portfolio
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <h1>Bharat Financial Intelligence Layer</h1>
+            <p class="subtitle">Understand your investments. Not just track them.</p>
+            <p>An AI‑powered platform that helps Indian retail investors analyze portfolio risk, understand exposure, and stay informed with relevant news — in simple language.</p>
+            <div style="margin-top: 40px;">
+                <button class="cta-button" id="getStartedBtn">
+                    <i class="fas fa-rocket"></i> Get Started for Free
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section id="demo" class="how-it-works">
+        <div class="container">
+            <div class="upload-demo fade-in">
+                <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem;">Analyze Your Portfolio</h2>
+                
+                <!-- File Upload Area -->
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h3 style="margin-bottom: 10px;">Upload Your Demat Statement</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">Drag and drop your PDF file here or click to browse</p>
+                    <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                    <button class="upload-button" id="uploadButton">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose File
+                    </button>
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: var(--gray);">Supported formats: PDF (max 10MB)</p>
+                </div>
+                
+                <!-- File Preview -->
+                <div class="file-preview" id="filePreview">
+                    <div class="file-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="file-info">
+                        <h4 id="fileName">portfolio_statement.pdf</h4>
+                        <p>Ready for analysis</p>
+                    </div>
+                </div>
+                
+                <!-- Upload Progress -->
+                <div class="upload-progress" id="uploadProgress">
+                    <div class="progress-bar">
+                        <div class="progress" id="progressBar"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">Uploading...</p>
+                </div>
+                
+                <!-- Analyze Button -->
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="cta-button" id="analyzeBtn" style="padding: 16px 48px;">
+                        <i class="fas fa-chart-line"></i> Analyze Portfolio
+                    </button>
+                </div>
+                
+                <!-- Error Message -->
+                <div class="error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-circle"></i> 
+                    <span id="errorText">There was an error processing your request. Please try again.</span>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <p style="color: var(--gray);"><i class="fas fa-lock" style="margin-right: 8px;"></i> Your data is encrypted and never stored permanently</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading State -->
+    <section class="loading" id="loadingSection">
+        <div class="container">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <h3 id="loadingTitle">Analyzing your portfolio...</h3>
+                <p id="loadingMessage">This may take a few moments while we process your statement</p>
+                <div class="progress-bar" style="max-width: 300px; margin: 20px auto;">
+                    <div class="progress" id="analysisProgress"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Dashboard -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="dashboard-title">Portfolio Analysis Results</h2>
+                <button class="upload-new-btn" id="newUploadBtn">
+                    <i class="fas fa-upload"></i> Upload New Statement
+                </button>
+            </div>
+            
+            <!-- Portfolio Summary -->
+            <div class="portfolio-summary fade-in">
+                <h3>Portfolio Summary</h3>
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalStocks">8</div>
+                            <div class="stat-label">Total Stocks</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalSectors">5</div>
+                            <div class="stat-label">Sectors</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="avgHolding">12.5%</div>
+                            <div class="stat-label">Avg Holding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analysis Grid -->
+            <div class="analysis-grid">
+                <!-- Health Score Card -->
+                <div class="health-score-card fade-in">
+                    <div class="score-header">
+                        <h3 class="score-title">Portfolio Health Score</h3>
+                        <span class="score-label" id="healthLabel">Excellent</span>
+                    </div>
+                    
+                    <div class="score-display">
+                        <div class="score-circle" id="scoreCircle">
+                            <div class="score-value" id="healthScore">100</div>
+                        </div>
+                    </div>
+                    
+                    <p class="score-description" id="scoreDescription">Excellent portfolio diversification and risk management</p>
+                    
+                    <div class="score-breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Diversification</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill" style="width: 95%"></div>
+                            </div>
+                            <span class="breakdown-value">95%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Risk Management</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill" style="width: 90%"></div>
+                            </div>
+                            <span class="breakdown-value">90%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Sector Balance</span>
+                            <div class="breakdown-bar">
+                                <div class="breakdown-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="breakdown-value">85%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Risk Reasons Card -->
+                <div class="risk-reasons-card fade-in">
+                    <div class="risk-header">
+                        <div class="risk-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3 class="risk-title">Key Insights</h3>
+                    </div>
+                    
+                    <div class="reasons-list" id="reasonsList">
+                        <!-- Risk reasons will be populated by JavaScript -->
+                        <div class="reason-item">
+                            <div class="reason-number">1</div>
+                            <div class="reason-text">Portfolio excellent diversified hai across multiple sectors</div>
+                        </div>
+                        <div class="reason-item">
+                            <div class="reason-number">2</div>
+                            <div class="reason-text">Risk management perfect hai, concentration limits within range</div>
+                        </div>
+                        <div class="reason-item">
+                            <div class="reason-number">3</div>
+                            <div class="reason-text">All major sectors me balanced exposure hai</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stock Holdings Table -->
+            <!-- In the holdings section of index.html -->
+            <div class="holdings-section fade-in">
+                <h3 class="holdings-title">
+                    <i class="fas fa-list-alt" style="font-size: 1.2rem;"></i>
+                    Stock Holdings
+                </h3>
+                <div class="holdings-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Stock Name</th>
+                                <th>Sector</th>
+                                <th>Portfolio %</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="holdingsTable">
+                            <!-- Stocks will be populated by JavaScript -->
+                            <tr>
+                                <td colspan="4" style="text-align: center; padding: 40px; color: var(--gray);">
+                                    <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i>
+                                    Loading stock holdings...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Insights Section -->
+            <div class="insights-section">
+                <h2 class="insights-title">AI-Powered Insights</h2>
+                <p class="insights-subtitle">Personalized recommendations based on your portfolio analysis</p>
+                
+                <div class="insights-grid" id="insightsGrid">
+                    <!-- Insights will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">What We Do</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon explainable">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Portfolio Health Insights</h3>
+                    <p>Most investors see numbers but don't understand what they mean. We convert your Demat statement into clear insights so you can make informed decisions — without giving trading advice.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon india">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Identify Concentration & Risk</h3>
+                    <p>Upload your portfolio, and we help you understand portfolio health and identify concentration and risk factors that could impact your investments.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon ai">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3>News Explained in Hinglish</h3>
+                    <p>Get stock‑specific news explained in simple Hinglish, so you can stay informed without needing a finance degree to understand market developments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Upload Your Demat Statement</h3>
+                    <p>Securely upload your portfolio statement in PDF format. We use bank-level encryption to protect your data.</p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>We Extract & Analyze</h3>
+                    <p>Our AI extracts your holdings and analyzes them for risk, concentration, and performance metrics.</p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>Get Portfolio Health Score</h3>
+                    <p>Receive a clear portfolio health score with actionable insights and explanations in simple language.</p>
+                </div>
+                
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>Stay Informed</h3>
+                    <p>Get relevant company news summarized in simple Hinglish so you can make informed decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div style="flex: 1; min-width: 250px;">
+                    <div class="footer-logo">
+                        <div style="background: var(--gradient); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        Bharat FIL
+                    </div>
+                    <p style="color: var(--gray-light); margin-bottom: 20px;">AI-powered financial intelligence for Indian investors.</p>
+                    <button class="cta-button" id="footerUploadBtn" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                        <i class="fas fa-upload"></i> Try Now
+                    </button>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#demo">Demo</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-twitter" style="margin-right: 8px;"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin" style="margin-right: 8px;"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fas fa-envelope" style="margin-right: 8px;"></i> Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Bharat Financial Intelligence Layer. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; color: var(--gray);">
+                    <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i>
+                    Disclaimer: This platform provides information and insights only. It does not offer investment advice or recommendations.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
